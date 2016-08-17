@@ -7,7 +7,6 @@ COPY . /app
 WORKDIR /app
 
 ENV ASPNETCORE_URLS http://*:80
-EXPOSE 3721
 
 # Start the app
 ENTRYPOINT dotnet SampleApi.dll

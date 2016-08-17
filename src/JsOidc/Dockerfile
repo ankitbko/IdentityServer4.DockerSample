@@ -7,7 +7,6 @@ COPY . /app
 WORKDIR /app
 
 ENV ASPNETCORE_URLS http://*:80
-EXPOSE 7017
 
 # Start the app
 ENTRYPOINT dotnet JsOidc.dll

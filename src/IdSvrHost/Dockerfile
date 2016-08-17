@@ -8,7 +8,6 @@ WORKDIR /app
 
 # Configure the listening port to 80
 ENV ASPNETCORE_URLS http://*:80
-EXPOSE 1941
 
 # Start the app
 ENTRYPOINT dotnet IdSvrHost.dll
