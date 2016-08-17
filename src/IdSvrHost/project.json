@@ -43,7 +43,10 @@
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "web.config",
+      "UI",
+      "idsvr3test.pfx",
+      "Dockerfile"
     ]
   },
 
