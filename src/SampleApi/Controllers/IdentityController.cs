@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace SampleApi.Controllers
 {
     [Route("[controller]")]
     [Authorize]
-    public class IdentityController : Controller
+    public class IdentityController : ControllerBase
     {
         [HttpGet]
         public ActionResult Get()
         {
-            return Json(User.Claims.Select(c => new { c.Type, c.Value }));
+            return new JsonResult(User.Claims.Select(
+                c => new { c.Type, c.Value }));
         }
     }
 }

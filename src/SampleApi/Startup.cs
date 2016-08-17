@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace SampleApi
@@ -10,15 +11,28 @@ namespace SampleApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services
+                .AddMvcCore()
+                .AddJsonFormatters()
+                .AddAuthorization();
+
+            services.AddWebEncoders();
+            services.AddCors();
+            services.AddDistributedMemoryCache();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
-            loggerFactory.AddDebug();
+            Func<string, LogLevel, bool> filter = (scope, level) => 
+                scope.StartsWith("Microsoft.AspNetCore.Authentication") || 
+                scope.StartsWith("Microsoft.AspNetCore.Authorization") ||
+                scope.StartsWith("IdentityServer") ||
+                scope.StartsWith("IdentityModel") ||
+                level == LogLevel.Error ||
+                level == LogLevel.Critical;
 
-            app.UseIISPlatformHandler();
+            loggerFactory.AddConsole(filter);
+            loggerFactory.AddDebug(filter);
 
             app.UseCors(policy =>
             {
@@ -27,20 +41,19 @@ namespace SampleApi
                 policy.AllowAnyMethod();
             });
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            app.UseIdentityServerAuthentication(options =>
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                options.Authority = "http://192.168.99.100:22530/";
-                options.ScopeName = "api1";
+                Authority = "http://localhost:1941",
+                RequireHttpsMetadata = false,
 
-                options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = true;
+                EnableCaching = true,
+
+                ScopeName = "api1",
+                ScopeSecret = "secret",
+                AutomaticAuthenticate = true
             });
 
             app.UseMvc();
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

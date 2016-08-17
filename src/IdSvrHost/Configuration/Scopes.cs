@@ -1,7 +1,7 @@
-﻿using IdentityServer4.Core.Models;
+﻿using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace IdSvrHost.Configuration
+namespace Host.Configuration
 {
     public class Scopes
     {
@@ -10,27 +10,13 @@ namespace IdSvrHost.Configuration
             return new List<Scope>
             {
                 StandardScopes.OpenId,
-                StandardScopes.ProfileAlwaysInclude,
-                StandardScopes.EmailAlwaysInclude,
-                StandardScopes.OfflineAccess,
-                StandardScopes.RolesAlwaysInclude,
-
+                StandardScopes.Profile,
+                StandardScopes.Email,
                 new Scope
                 {
                     Name = "api1",
                     DisplayName = "API 1",
                     Description = "API 1 features and data",
-                    Type = ScopeType.Resource,
-                    Claims = new List<ScopeClaim>
-                    {
-                        new ScopeClaim("role")
-                    }
-                },
-                new Scope
-                {
-                    Name = "api2",
-                    DisplayName = "API 2",
-                    Description = "API 2 features and data, which are better than API 1",
                     Type = ScopeType.Resource
                 }
             };

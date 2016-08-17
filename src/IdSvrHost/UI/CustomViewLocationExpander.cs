@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNet.Mvc.Razor;
+﻿using Microsoft.AspNetCore.Mvc.Razor;
 using System.Collections.Generic;
 
-namespace IdSvrHost.UI
+namespace Host.UI
 {
     public class CustomViewLocationExpander : IViewLocationExpander
     {

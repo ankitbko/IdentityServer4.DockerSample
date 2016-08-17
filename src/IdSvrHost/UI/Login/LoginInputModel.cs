@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdSvrHost.UI.Login
+namespace Host.UI.Login
 {
     public class LoginInputModel
     {
@@ -9,6 +9,6 @@ namespace IdSvrHost.UI.Login
         [Required]
         public string Password { get; set; }
         public bool RememberLogin { get; set; }
-        public string SignInId { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace IdSvrHost.UI.Home
+namespace Host.UI.Home
 {
     public class HomeController : Controller
     {

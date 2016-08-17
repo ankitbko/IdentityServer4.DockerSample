@@ -1,7 +1,13 @@
-FROM microsoft/aspnet:1.0.0-rc1-update1-coreclr
+FROM microsoft/dotnet:1.0.0-core
 
+# Copy the app
 COPY . /app
-WORKDIR /app/approot
 
+# Set the Working Directory
+WORKDIR /app
+
+ENV ASPNETCORE_URLS http://*:PORT
 EXPOSE PORT
-ENTRYPOINT ["./web"]
+
+# Start the app
+ENTRYPOINT dotnet DLLNAME

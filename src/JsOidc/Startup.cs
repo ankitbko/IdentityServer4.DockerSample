@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 namespace JsOidc
 {
@@ -17,7 +12,6 @@ namespace JsOidc
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseIISPlatformHandler();
             app.UseStaticFiles();
             app.Run(ctx =>
             {
@@ -25,8 +19,5 @@ namespace JsOidc
                 return Task.FromResult(0);
             });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

@@ -1,7 +1,7 @@
-﻿using IdentityServer4.Core.Models;
+﻿using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace IdSvrHost.Configuration
+namespace Host.Configuration
 {
     public class Clients
     {
@@ -18,20 +18,21 @@ namespace IdSvrHost.Configuration
                     ClientName = "JavaScript OIDC Client",
                     ClientUri = "http://identityserver.io",
 
-                    Flow = Flows.Implicit,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "http://192.168.99.100:7017/index.html",
-                        "http://192.168.99.100:7017/silent_renew.html",
+                        "http://localhost:7017/index.html",
+                        "http://localhost:7017/silent_renew.html",
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://192.168.99.100:7017/index.html",
+                        "http://localhost:7017/index.html",
                     },
 
                     AllowedCorsOrigins = new List<string>
                     {
-                        "http://192.168.99.100:7017"
+                        "http://localhost:7017"
                     },
 
                     AllowedScopes = new List<string>
@@ -41,8 +42,8 @@ namespace IdSvrHost.Configuration
                         StandardScopes.Email.Name,
                         StandardScopes.Roles.Name,
                         "api1"
-                    }
-                }
+                    },
+                },
             };
         }
     }
