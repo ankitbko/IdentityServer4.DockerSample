@@ -45,7 +45,7 @@
       "wwwroot",
       "web.config",
       "UI",
-      "idsvr3test.pfx",
+      "idsrv3test.pfx",
       "Dockerfile"
     ]
   },
